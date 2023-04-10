@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { FC } from 'react'
 
-const Timer = ({}) => {
+interface TimerProps {
+  size : number
+}
+
+
+
+
+const Timer : FC<TimerProps> = ({ size }) => {
   const [time, setTime] = useState(180) // 3 minutes in seconds
   const [isActive, setIsActive] = useState(false)
 
@@ -31,7 +39,7 @@ const Timer = ({}) => {
     <CountdownCircleTimer
     isPlaying = {isActive}
     trailColor={'#f06292'}
-    size={123}
+    size={size}
     duration={25*60}
     strokeWidth={25}
     colors={['#03045E', '#F7B801', '#A30000', '#A30000']}
