@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 const Footer = () => {
     return ( 
         <footer className="footer grid grid-col text-center gap-y-4 absolute bottom-20">
-            <span className={`${inter.className} font-medium text-sm ml-3`} >Made with Love by Adham ElGazoly</span>
+            <span className={`${inter.className} font-medium text-sm ml-3`} >Crafted with passion by Adham ElGazoly</span>
             <div className="social flex flex-row gap-x-3 justify-self-center">
                 <a href="https://www.linkedin.com/in/adham-el-gazoly-075385190/" target="_blank">
                     <Image src="/linkedin.svg" width={24} height={24} alt="linkedin" quality={100}/>
