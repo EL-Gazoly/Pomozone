@@ -1,10 +1,22 @@
 import Image from 'next/image'
+import { useState } from 'react'
 import { Inter } from 'next/font/google'
-import CircleProgress from '../components/CircleProgress'
 import Footer from '@/components/Footer'
+import CircleProgress from '../components/CircleProgress'
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const [isActive, setIsActive] = useState(false)
+  const [key, setKey] = useState(0);
+
+  const handelReset = () => {
+    setKey(key + 1)
+    setIsActive(false)
+  }
+
   return (
     <main className={` ${inter.className} flex flex-col`}>
       <div className="top md:hidden flex flex-row mt-7 mx-3 justify-between">
@@ -28,17 +40,29 @@ export default function Home() {
       </div>
 
       <div className="left flex flex-col items-center w-full mt-14 gap-y-7">
-        <CircleProgress size={240}/>
+        <CircleProgress size={240} isActive={isActive} key={key}/>
 
         <div className="buttons flex flex-row gap-x-8 justify-center items-center">
-          <div className="resetbutton border border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer " >
+          <div className={`"resetbutton border border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer "
+            ${!isActive ? ' opacity-50' : ''}
+          `} 
+          onClick={handelReset}
+          >
             <Image src="/resetTimerButton.svg" width={24} height={24} alt="reset" quality={100}/>
           </div>
-
-          <div className="startbutton border border-primary rounded-full p-2 hover:bg-gray-100 cursor-pointer " >
+        {!isActive ? (
+          <div className="startbutton border border-primary rounded-full p-2 hover:bg-gray-100 cursor-pointer "
+          onClick={() => setIsActive(!isActive)}
+          >
             <Image src="/startTimerButton.svg" width={24} height={24} alt="" quality={100}/>
           </div>
-
+           ) : (
+            <div className="pauseTimerButton border border-primary rounded-full p-2 hover:bg-gray-100 cursor-pointer "
+            onClick={() => setIsActive(!isActive)}
+            >
+              <Image src="/pauseTimerButton.svg" width={24} height={24} alt="" quality={100}/>
+            </div>
+            ) }
           <div className="skipbutton border  border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer " >
             <Image src="/skipTimerButton.svg" width={24} height={24} alt="" quality={100}/>
           </div>

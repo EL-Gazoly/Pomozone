@@ -4,23 +4,21 @@ import { FC } from 'react'
 
 interface TimerProps {
   size : number
+  isActive : boolean
+  key : number
 }
 
 
 
 
-const Timer : FC<TimerProps> = ({ size }) => {
-  const [time, setTime] = useState(180) // 3 minutes in seconds
-  const [isActive, setIsActive] = useState(false)
+const Timer : FC<TimerProps> = ({ size, isActive, key }) => {
+  
 
-  const toggleTimer = () => {
-    setIsActive(!isActive)
-  }
+  const [isFocus, setIsFocus] = useState(true)
 
-  const resetTimer = () => {
-    setIsActive(false)
-    setTime(180)
-  }
+
+  const time = isFocus ? 25 * 60 : 5 * 60
+
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60)
@@ -28,30 +26,37 @@ const Timer : FC<TimerProps> = ({ size }) => {
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
   }
 
-  const circleProps = {
-    strokeDasharray: '565.48',
-    strokeDashoffset: ((565.48 * (180 - time)) / 180).toString(),
-    strokeWidth: '6',
-    stroke: isActive ? 'var(--timer-red)' : 'var(--timer-gray)',
-  }
+
 
   return (
     <CountdownCircleTimer
-    isPlaying = {isActive}
-    trailColor={'#f06292'}
+   
+    key={key} // to force the component to re-render when the key changes
+    isPlaying={isActive}
     size={size}
-    duration={25*60}
+    duration={time}
     strokeWidth={25}
+    trailColor="#f06292"
+    strokeLinecap="butt"
     colors={['#03045E', '#F7B801', '#A30000', '#A30000']}
     colorsTime={[7, 5, 2, 0]}
+    onComplete={() => {
+      setIsFocus(!isFocus);
+      return {
+        shouldRepeat: true,
+        delay: 0,
+      };
+    }}
   >
-    {({ remainingTime }) => 
-    <div className=' text-3xl font-extrabold flex flex-col gap-y-3'>
-    {formatTime(remainingTime)}
-    <span>Focus</span>
-    </div>
-    }
+    {({ remainingTime }) => (
+      <div className="text-3xl font-extrabold flex flex-col gap-y-3">
+        {formatTime(remainingTime)}
+        <span>{isFocus ? 'Focus' : 'Break'}</span>
+      </div>
+    )}
   </CountdownCircleTimer>
+
+  
   )
 }
 
