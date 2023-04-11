@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
           </div>
           <div className={` ${inter.className} flex flex-col md:flex-row`}>
         
-          <div className="signin-button hidden md:flex absolute top-14 md:right-4 xl:right-5 2xl:right-16">
+          <div className="signin-button hidden md:flex absolute top-14 mdghi:right-4 xl:right-5 2xl:right-16">
           <div className="sing-button border border-border flex flex-row cursor-pointer p-2 gap-x-2 hover:bg-gray-300 transition-all duration-500 items-center justify-center">
             <Image src="/signIcon.svg" alt="sign in"  width={24}  height={24}   quality={100}/>
             <span className=' uppercase text-sm '> sign in</span>
