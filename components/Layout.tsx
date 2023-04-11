@@ -32,8 +32,7 @@ const Layout = ({ children }) => {
 
           </div>
 
-          </div>  
-          
+          </div>
         
           
               {children}
@@ -43,7 +42,7 @@ const Layout = ({ children }) => {
           </div>
 
 
-          <div className={` nav w-64 h-full absolute right-1 top-0 bg-white
+          <div className={` nav w-64 h-full absolute right-1 top-0 bg-white md:hidden
           ${show ? '' : 'hidden'}
           `}>
             <div className=' grid grid-col w-full mt-10  '>
