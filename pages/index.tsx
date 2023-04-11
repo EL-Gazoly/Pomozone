@@ -57,11 +57,27 @@ export default function Home() {
           <Image src="/exitIcon.svg" width={24} height={24} alt="close" quality={100}/>
         </div>
 
-        <div className="menu-item flex self-center flex-col justify-center items-center gap-y-8 mt-80">
-          <div className="time">
-            
-
+        <div className="menu-item flex self-center flex-col justify-center items-center gap-y-12 mt-72 text-start
+           font-normal text-base
+        ">
+          <div className="time flex flex-row items-center  gap-x-2">
+            <Image src="/timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
+            <span>Timer</span>
           </div>
+
+          <div className="settings flex flex-row gap-x-2 items-center ml-5 opacity-70 hover:opacity-100">
+            <Image src="/Settings.svg" width={35} height={30} alt="settings" quality={100}/>
+            <span>Settings</span>
+          </div>
+
+          <div className="lightMode flex flex-row items-center ml-10 gap-x-2 opacity-70 hover:opacity-100">
+            <Image src="/light.svg" width={40} height={38} alt="light" quality={100}/>
+            <span>Light Mode</span>
+          
+          </div>
+
+
+
         </div>
 
 
