@@ -42,9 +42,7 @@ export default function Home() {
         <CircleProgress size={240} />
 
       </div>
-      <div className="footer flex flex-col items-center">
-       <Footer/>
-       </div>
+    
     </main>
 
     <div className={` nav w-64 h-full absolute right-1 top-0 bg-white
