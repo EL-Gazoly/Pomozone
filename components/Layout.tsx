@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     return (
         <>
         
-        <div className="container flex flex-col">
+        <div className={` ${inter.className} "container flex flex-col"`}>
         <div className="top md:hidden flex flex-row mt-7 mx-3 justify-between">
 
             <div className="sing-button border border-border flex flex-row cursor-pointer p-2 gap-x-2 hover:bg-gray-300 transition-all duration-500 items-center justify-center">
