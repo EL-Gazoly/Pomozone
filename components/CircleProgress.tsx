@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -11,12 +11,15 @@ interface TimerProps {
 
 
 
-const Timer : FC<TimerProps> = ({ size}) => {
+const Timer : FC<TimerProps> = () => {
   
   const [isActive, setIsActive] = useState(false)
   const [isFocus, setIsFocus] = useState(true)
   const [sessionsNumber, setSessionsNumber] = useState(1)
   const [key, setKey] = useState(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [size, setSize] = useState<number>(300);
+  const [strokeWidth, setStrokeWidth] = useState<number>(10);
 
   const handelReset = () => {
     setKey(key + 1)
@@ -64,6 +67,46 @@ const Timer : FC<TimerProps> = ({ size}) => {
    
   }
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    // add event listener to listen for window width changes
+    window.addEventListener('resize', handleResize);
+
+    // set initial window width
+    setWindowWidth(window.innerWidth);
+
+    // remove event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    setSize(windowWidth < 600 ? 200 : 300); // adjust size based on window width
+
+    if (windowWidth < 768) {
+      setSize(240);
+      setStrokeWidth(25);
+    }
+
+    else if ( windowWidth < 1024 && windowWidth > 768) {
+        setSize(300);
+        setStrokeWidth(30);
+    }
+
+    else if (windowWidth > 1024 && windowWidth < 1440) {
+        setSize(340);
+        setStrokeWidth(34);
+    }
+    else if (windowWidth > 1440) {
+        setSize(390);
+        setStrokeWidth(40);
+    }
+    setKey((prevKey) => prevKey + 1); // force component re-render by changing key
+  }, [windowWidth]);
+
+
   return (
     <div className='flex flex-col items-center w-full gap-y-7'>
     <CountdownCircleTimer
@@ -72,7 +115,7 @@ const Timer : FC<TimerProps> = ({ size}) => {
     isPlaying={isActive}
     size={size}
     duration={getDuration()}
-    strokeWidth={25}
+    strokeWidth={strokeWidth}
     trailColor="#f06292"
     strokeLinecap="butt"
     colors={['#03045E', '#F7B801', '#A30000', '#A30000']}
@@ -87,7 +130,7 @@ const Timer : FC<TimerProps> = ({ size}) => {
     }}
   >
     {({ remainingTime }) => (
-      <div className="text-3xl font-extrabold flex flex-col gap-y-3">
+      <div className="text-3xl font-extrabold flex flex-col gap-y-3 lg:text-4xl">
         {formatTime(remainingTime)}
         <span>{isFocus ? 'Focus' : 'Break'}</span>
       </div>
@@ -123,7 +166,7 @@ const Timer : FC<TimerProps> = ({ size}) => {
 
         </div>
 
-        <div className={`text-base font-medium number-sessions flex flex-col gap-y-1 text-center mt-24`}>
+        <div className={`text-base font-medium number-sessions flex flex-col gap-y-1 text-center mt-24 lg:mt-10`}>
           <span> {sessionsNumber} of 4</span>   
           <span> sessions</span>       
         </div>

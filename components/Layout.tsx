@@ -1,4 +1,5 @@
 import Footer from "./Footer";
+import RightNav from "./rightnav";
 import Image from "next/image";
 import { Inter } from 'next/font/google'
 import { useState } from 'react'
@@ -11,7 +12,7 @@ const Layout = ({ children }) => {
   const [show, setShow] = useState(false)
 
     return (
-        <>
+        <div>
           <div className="top md:hidden flex flex-row mt-7 mx-3 justify-between">
 
           <div className="sing-button border border-border flex flex-row cursor-pointer p-2 gap-x-2 hover:bg-gray-300 transition-all duration-500 items-center justify-center">
@@ -33,10 +34,15 @@ const Layout = ({ children }) => {
           </div>
 
           </div>
+          <div className={` ${inter.className} flex flex-col md:flex-row`}>
+
+          
+          <RightNav/>
         
-          
+          <div className=" flex-1">
               {children}
-          
+              </div>
+          </div>
           <div className="footer flex flex-col items-center">
         <Footer/>
           </div>
@@ -79,7 +85,7 @@ const Layout = ({ children }) => {
               
             </div>
           </div>
-        </>
+        </div>
       );
 }
  
