@@ -1,7 +1,6 @@
 
 import { Inter } from 'next/font/google'
-import RightNav from '@/components/rightnav'
-import { useState } from 'react'
+import Head from 'next/head'
 import CircleProgress from '../components/CircleProgress'
 
 
@@ -15,6 +14,9 @@ export default function Home() {
 
   return (
     <>
+    <Head>
+      <title>Pomozone | Home</title>
+    </Head>
     <main className={` ${inter.className} flex flex-col md:flex-row`}>
      
     
