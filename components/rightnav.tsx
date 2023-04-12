@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 const RightNav = () => {
     return (  
 
@@ -10,17 +11,17 @@ const RightNav = () => {
           </div>
 
       
-    <div className="div grid grid-cols-1  flex-1 items-center justify-center gap-y-24 ml-5 ">
+    <div className="div grid grid-cols-1  flex-1 items-center justify-center gap-y-20 ml-5 ">
       
-      <div className="time flex flex-row items-center  gap-x-2 cursor-pointer ml-4">
+      <Link href="/" className="time flex flex-row items-center  gap-x-2 cursor-pointer ml-4">
                   <Image src="/timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
                   <span>Timer</span>
-                </div>
+                </Link>
 
-                <div className="settings flex flex-row gap-x-2 items-center ml-5 opacity-70 hover:opacity-100 cursor-pointer">
+                <Link href={"/settings"} className="settings flex flex-row gap-x-2 items-center ml-5 opacity-70 hover:opacity-100 cursor-pointer">
                   <Image src="/Settings.svg" width={35} height={30} alt="settings" quality={100}/>
                   <span>Settings</span>
-                </div>
+                </Link>
 
               
         
