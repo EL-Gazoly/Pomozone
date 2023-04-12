@@ -1,6 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+
 const RightNav = () => {
+
+    const [lastSelected, setLastSelected] = useState("timer");
+
     return (  
 
         <>
@@ -12,17 +17,28 @@ const RightNav = () => {
           </div>
 
       
-    <div className="div grid grid-cols-1  flex-1 items-center justify-center  gap-y-20 ml-5 ">
-      
-      <Link href="/" className="time flex flex-row items-center  gap-x-2 cursor-pointer ml-4">
-                  <Image src="/timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
-                  <span>Timer</span>
-                </Link>
+    <div className="div grid grid-cols-1  flex-1 items-center justify-center  gap-y-20 ">
+                <div  className=" w-full hover:bg-gray-100 py-3 pl-5" >
+                  <Link href="/" className={`time flex flex-row items-center  gap-x-2 cursor-pointer ml-4
+                  ${lastSelected === "timer" ? "opacity-100" : "opacity-60 hover:opacity-100  "}}  `
+                }
+                  onClick={() => setLastSelected("timer")}
+                  >
+                    <Image src="/timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
+                    <span>Timer</span>
+                  </Link>
+                  </div>
 
-                <Link href={"/settings"} className="settings flex flex-row gap-x-2 items-center ml-5 opacity-70 hover:opacity-100 cursor-pointer">
-                  <Image src="/Settings.svg" width={35} height={30} alt="settings" quality={100}/>
-                  <span>Settings</span>
-                </Link>
+                  <div  className=" w-full hover:bg-gray-100 py-3 pl-5" >
+                  <Link href={"/settings"} className={`settings flex flex-row gap-x-2 items-center ml-5 cursor-pointer
+                  ${lastSelected === "settings" ? "opacity-100" : "opacity-60 hover:opacity-100"}}  
+                  `}
+                  onClick={() => setLastSelected("settings")}
+                  >
+                      <Image src="/Settings.svg" width={35} height={30} alt="settings" quality={100}/>
+                      <span>Settings</span>
+                  </Link>
+                  </div>
 
               
         
