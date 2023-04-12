@@ -17,7 +17,7 @@ const RightNav = () => {
           </div>
 
       
-    <div className="div grid grid-cols-1  flex-1 items-center justify-center  gap-y-20 ">
+    <div className="div grid grid-cols-1  flex-1 items-center justify-center  gap-y-11 ">
                 <div  className=" w-full hover:bg-gray-100 py-3 pl-5" >
                   <Link href="/" className={`time flex flex-row items-center  gap-x-2 cursor-pointer ml-4
                   ${lastSelected === "timer" ? "opacity-100" : "opacity-60 hover:opacity-100  "}}  `
