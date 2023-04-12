@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 
 const inter = Inter({ subsets: ['latin'] })
-
+//@ts-ignore
 const Layout = ({ children }) => {
 
   const [show, setShow] = useState(false)
