@@ -12,6 +12,17 @@ interface TimerProps {
 
 
 const Timer : FC<TimerProps> = () => {
+
+  useEffect(() => {
+    const workDuration = localStorage.getItem('workDuration')
+    if (workDuration) setWorkDuration(JSON.parse(workDuration))
+
+    const shortBreakDuration = localStorage.getItem('shortBreakDuration')
+    if (shortBreakDuration) setShortBreakDuration(JSON.parse(shortBreakDuration))
+
+    const longBreakDuration = localStorage.getItem('longBreakDuration')
+    if (longBreakDuration) setLongBreakDuration(JSON.parse(longBreakDuration))
+  }, [])
   
   const [isActive, setIsActive] = useState(false)
   const [isFocus, setIsFocus] = useState(true)
@@ -20,6 +31,9 @@ const Timer : FC<TimerProps> = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
   const [size, setSize] = useState<number>(300);
   const [strokeWidth, setStrokeWidth] = useState<number>(10);
+  const [workDuration, setWorkDuration] = useState(25)
+  const [shortBreakDuration, setShortBreakDuration] = useState(5)
+  const [longBreakDuration, setLongBreakDuration] = useState(20)
 
   const handelReset = () => {
     setKey(key + 1)
@@ -47,9 +61,14 @@ const Timer : FC<TimerProps> = () => {
 
   const getDuration = () => {
     if (isFocus ) {
+      if (workDuration) return workDuration * 60
       return 25 * 60
     }
-    if (sessionsNumber % 4 === 0)  return 15 * 60
+    if (sessionsNumber % 4 === 0)  {
+      if (longBreakDuration) return longBreakDuration * 60
+      return 15 * 60
+    }
+    if (shortBreakDuration) return shortBreakDuration * 60
     return 5 * 60
   }
 

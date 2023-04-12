@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { useState } from 'react'
 import { Inter } from 'next/font/google'
 import Slider from '../components/slider'
 import Switch from '@mui/material/Switch';
+import { useState, useEffect } from 'react'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
@@ -10,6 +10,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 const inter = Inter({ subsets: ['latin'] })
 
 const Settings = () => {
+    useEffect(() => {
+        const workDuration = localStorage.getItem('workDuration')
+        if (workDuration) setWorkDuration(JSON.parse(workDuration))
+    
+        const shortBreakDuration = localStorage.getItem('shortBreakDuration')
+        if (shortBreakDuration) setShortBreakDuration(JSON.parse(shortBreakDuration))
+    
+        const longBreakDuration = localStorage.getItem('longBreakDuration')
+        if (longBreakDuration) setLongBreakDuration(JSON.parse(longBreakDuration))
+      }, [])
 
     const workMarks = [5 , 25 ,60]
     const breakMarks = [1 , 5 ,30]
@@ -21,13 +31,17 @@ const Settings = () => {
 
     const handleWorkDurationChange = (value : number) => {
         setWorkDuration(value)
+        localStorage.setItem('workDuration', JSON.stringify(value))
     }
     const handleShortBreakDurationChange = (value : number) => {
         setShortBreakDuration(value)
+        localStorage.setItem('shortBreakDuration', JSON.stringify(value))
+        
         
     }
     const handleLongBreakDurationChange = (value : number) => {
         setLongBreakDuration(value)
+        localStorage.setItem('longBreakDuration', JSON.stringify(value))
         
     }
 
