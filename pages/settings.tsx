@@ -35,7 +35,7 @@ const Settings = () => {
                     <h1 className=" ">Long break Duration</h1>
                     <Slider min={1} max={45} defaultValue={20} marks={longBreakMarks}/>
                     </div>
-                    <div className="toggles grid grid-cols-1 w-1/4 ">
+                    <div className="toggles grid grid-cols-1 w-3/4 lg:w-3/5 xl:w-2/5 2xl:w-1/4 ">
                     <FormGroup >
                         <FormControlLabel control={<Switch  />} label="Dark mode" color='primary' />
                     </FormGroup>
