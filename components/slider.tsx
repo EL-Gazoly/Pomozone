@@ -6,16 +6,17 @@ import { Slider as TimeSlider } from '@mui/material';
 interface SliderProps {
     min : number
     max : number
+    value : number
+    onValueChange : (value : number) => void
     defaultValue : number
     marks : number[]
 }
 
-const Slider : FC <SliderProps>  = ( { min , max , defaultValue,  marks}) => {
+const Slider : FC <SliderProps>  = ( { min , max , value, onValueChange, defaultValue,  marks}) => {
 
-    const [value, setValue] = useState(25);    
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(Number(e.target.value));
+        onValueChange(Number(e.target.value));
     };
     return ( 
 
