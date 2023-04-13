@@ -22,6 +22,9 @@ const Timer : FC<TimerProps> = () => {
 
     const longBreakDuration = localStorage.getItem('longBreakDuration')
     if (longBreakDuration) setLongBreakDuration(JSON.parse(longBreakDuration))
+
+    const isDark = localStorage.getItem("isDark");
+    if (isDark) setDarkMode(JSON.parse(isDark));
   }, [])
   
   const [isActive, setIsActive] = useState(false)
@@ -34,6 +37,7 @@ const Timer : FC<TimerProps> = () => {
   const [workDuration, setWorkDuration] = useState(25)
   const [shortBreakDuration, setShortBreakDuration] = useState(5)
   const [longBreakDuration, setLongBreakDuration] = useState(20)
+  const [DarkMode, setDarkMode] = useState(false);
 
   const handelReset = () => {
     setKey(key + 1)
@@ -128,33 +132,69 @@ const Timer : FC<TimerProps> = () => {
 
   return (
     <div className='flex flex-col items-center w-full gap-y-7'>
-    <CountdownCircleTimer
+    { DarkMode ? (
+       <CountdownCircleTimer
    
-    key={key} // to force the component to re-render when the key changes
-    isPlaying={isActive}
-    size={size}
-    duration={getDuration()}
-    strokeWidth={strokeWidth}
-    trailColor="#f06292"
-    strokeLinecap="butt"
-    colors={['#03045E', '#F7B801', '#A30000', '#A30000']}
-    colorsTime={[7, 5, 2, 0]}
-    onComplete={() => {
-      handleDurationEnded()
+       key={key} // to force the component to re-render when the key changes
+       isPlaying={isActive}
+       size={size}
+       duration={getDuration()}
+       strokeWidth={strokeWidth}
+       trailColor="#f06292"
+       strokeLinecap="butt"
+       
+       colors={['#7481FF', '#F7B801', '#A30000', '#A30000']}
+       colorsTime={[7, 5, 2, 0]}
+       onComplete={() => {
+         handleDurationEnded()
+         
+         return {
+           shouldRepeat: true,
+           delay: 0,
+         };
+       }}
+     >
+       {({ remainingTime }) => (
+         <div className="text-3xl font-extrabold flex flex-col gap-y-3 lg:text-4xl text-white">
+           {formatTime(remainingTime)}
+           <span>{isFocus ? 'Focus' : 'Break'}</span>
+         </div>
+       )}
+     </CountdownCircleTimer>
+
+
+    ) : (
+      <CountdownCircleTimer
+   
+      key={key} // to force the component to re-render when the key changes
+      isPlaying={isActive}
+      size={size}
+      duration={getDuration()}
+      strokeWidth={strokeWidth}
+      trailColor="#f06292"
+      strokeLinecap="butt"
       
-      return {
-        shouldRepeat: true,
-        delay: 0,
-      };
-    }}
-  >
-    {({ remainingTime }) => (
-      <div className="text-3xl font-extrabold flex flex-col gap-y-3 lg:text-4xl">
-        {formatTime(remainingTime)}
-        <span>{isFocus ? 'Focus' : 'Break'}</span>
-      </div>
+      colors={['#03045E', '#F7B801', '#A30000', '#A30000']}
+      colorsTime={[7, 5, 2, 0]}
+      onComplete={() => {
+        handleDurationEnded()
+        
+        return {
+          shouldRepeat: true,
+          delay: 0,
+        };
+      }}
+    >
+      {({ remainingTime }) => (
+        <div className="text-3xl font-extrabold flex flex-col gap-y-3 lg:text-4xl">
+          {formatTime(remainingTime)}
+          <span>{isFocus ? 'Focus' : 'Break'}</span>
+        </div>
+      )}
+    </CountdownCircleTimer>
+
     )}
-  </CountdownCircleTimer>
+   
   
   <div className="buttons flex flex-row gap-x-8 justify-center items-center">
           <div className={`"resetbutton border border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer "
@@ -184,11 +224,19 @@ const Timer : FC<TimerProps> = () => {
           </div>
 
         </div>
+        { DarkMode ? (
+          <div className={`text-base font-medium number-sessions flex flex-col gap-y-1 text-center mt-24 lg:mt-10 text-white`}>
+          <span> {sessionsNumber} of 4</span>   
+          <span> sessions</span>       
+        </div>
 
+        ) : (
         <div className={`text-base font-medium number-sessions flex flex-col gap-y-1 text-center mt-24 lg:mt-10`}>
           <span> {sessionsNumber} of 4</span>   
           <span> sessions</span>       
         </div>
+        )}
+
   </div>
   )
 }

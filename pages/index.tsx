@@ -1,17 +1,10 @@
-
-import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import { Inter } from 'next/font/google'
 import CircleProgress from '../components/CircleProgress'
-
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-
-  
-
-
-
   return (
     <>
     <Head>

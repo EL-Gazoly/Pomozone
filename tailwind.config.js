@@ -15,7 +15,7 @@ module.exports = {
 
       colors: {
         'primary' : '#03045E',
-        'border' : '#D8D7D9'
+        'border' : '#9C9C9C'
       },
       borderWidth: {
         '6': '6px',
