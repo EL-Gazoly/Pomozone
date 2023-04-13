@@ -3,6 +3,7 @@ import RightNav from "./rightnav";
 import Image from "next/image";
 import { Inter } from 'next/font/google'
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,7 +15,10 @@ const Layout = ({ children }) => {
 }, []);
 
   const [DarkMode, setDarkMode] = useState(false);
+  const { systemTheme, theme, setTheme } = useTheme();
   const [show, setShow] = useState(false)
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
     return (
         <div className=" dark:bg-darkbg">
@@ -42,7 +46,7 @@ const Layout = ({ children }) => {
           <div className={` ${inter.className} flex flex-col md:flex-row`}>
         
           <div className="signin-button hidden md:flex absolute top-14 md:right-4 xl:right-5 2xl:right-16">
-            { DarkMode ? (
+            { currentTheme === "dark" ? (
           <div className="sing-button border border-border flex flex-row cursor-pointer p-2 gap-x-2 hover:bg-gray-300 transition-all duration-500 items-center justify-center">
               <Image src="/dark-singIcon.svg" alt="sign in"  width={24}  height={24}   quality={100}/>
             <span className=' uppercase text-sm  text-white'> sign in</span>
