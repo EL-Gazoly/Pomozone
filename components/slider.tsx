@@ -1,5 +1,6 @@
-import {FC , useState} from 'react'
+import {FC } from 'react'
 import { Slider as TimeSlider } from '@mui/material';
+import { useTheme } from "next-themes";
 
 
 
@@ -14,6 +15,9 @@ interface SliderProps {
 
 const Slider : FC <SliderProps>  = ( { min , max , value, onValueChange, defaultValue,  marks}) => {
 
+    const { systemTheme, theme, setTheme } = useTheme();
+    const currentTheme = theme === "system" ? systemTheme : theme;
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onValueChange(Number(e.target.value));
@@ -21,6 +25,7 @@ const Slider : FC <SliderProps>  = ( { min , max , value, onValueChange, default
     return ( 
 
         < div>
+        {currentTheme === 'light' ? (
         <TimeSlider
              size="small"
              defaultValue={defaultValue}
@@ -40,6 +45,28 @@ const Slider : FC <SliderProps>  = ( { min , max , value, onValueChange, default
             
                 
         />
+        ) : (
+            <TimeSlider
+             size="small"
+             defaultValue={defaultValue}
+             aria-label="Small"
+             
+             valueLabelDisplay="auto"
+             min={min}
+             max={max}
+             value={value}
+             color='secondary'
+             //@ts-ignore
+             onChange={handleChange}
+                marks={marks.map((mark) => ({
+                    value: mark,
+                    label: mark + ' min',
+                }))}
+            
+                
+        />
+        )}
+            
         
         </div>
 

@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Slider from '../components/slider'
 import Switch from '@mui/material/Switch';
 import { useState, useEffect } from 'react'
+import { useTheme } from "next-themes";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
@@ -28,6 +29,9 @@ const Settings = () => {
     const [workDuration, setWorkDuration] = useState(25)
     const [shortBreakDuration, setShortBreakDuration] = useState(5)
     const [longBreakDuration, setLongBreakDuration] = useState(20)
+    const { systemTheme, theme, setTheme } = useTheme();
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
 
     const handleWorkDurationChange = (value : number) => {
         setWorkDuration(value)
@@ -70,9 +74,15 @@ const Settings = () => {
                     <Slider min={1} max={45} defaultValue={20} marks={longBreakMarks} value={longBreakDuration} onValueChange={handleLongBreakDurationChange}/>
                     </div>
                     <div className="toggles grid grid-cols-1 w-3/4 lg:w-3/5 xl:w-2/5 2xl:w-1/4 ">
-                    <FormGroup >
-                        <FormControlLabel control={<Switch  />} label="Dark mode" color='primary' />
+                    <FormGroup>
+                        <FormControlLabel
+                        control={<Switch checked={currentTheme === 'dark'} onChange={() => setTheme(currentTheme === 'dark' ? 'light' : 'dark')} color='secondary' />}
+                        label="Dark Mode"
+                        
+                        />
                     </FormGroup>
+
+                  
                     </div>
                    
                       
