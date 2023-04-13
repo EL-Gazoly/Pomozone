@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Image from 'next/image'
 import { FC } from 'react'
-
+import { useTheme } from "next-themes";
 interface TimerProps {
   size : number
   
@@ -38,6 +38,12 @@ const Timer : FC<TimerProps> = () => {
   const [shortBreakDuration, setShortBreakDuration] = useState(5)
   const [longBreakDuration, setLongBreakDuration] = useState(20)
   const [DarkMode, setDarkMode] = useState(false);
+
+  const { systemTheme, theme, setTheme } = useTheme();
+  
+
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   const handelReset = () => {
     setKey(key + 1)
@@ -132,7 +138,7 @@ const Timer : FC<TimerProps> = () => {
 
   return (
     <div className='flex flex-col items-center w-full gap-y-7'>
-    { DarkMode ? (
+    { currentTheme === "dark" ? (
        <CountdownCircleTimer
    
        key={key} // to force the component to re-render when the key changes
@@ -197,31 +203,47 @@ const Timer : FC<TimerProps> = () => {
    
   
   <div className="buttons flex flex-row gap-x-8 justify-center items-center">
-          <div className={`"resetbutton border border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer "
+          <div className={`"resetbutton border border-border rounded-full p-1 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer "
             ${!isActive ? ' opacity-50' : ''}
           `} 
           onClick={handelReset}
           >
+            { currentTheme === "light" ? (
             <Image src="/resetTimerButton.svg" width={24} height={24} alt="reset" quality={100}/>
+            ) : (
+              <Image src="/resetTimerButtonDark.svg" width={24} height={24} alt="reset" quality={100}/>
+            )}
           </div>
         {!isActive ? (
-          <div className="startbutton border border-primary rounded-full p-2 hover:bg-gray-100 cursor-pointer "
+          <div className="startbutton border border-primary rounded-full dark:border-dark-primary p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer "
           onClick={() => setIsActive(!isActive)}
           >
+            { currentTheme === "light" ? (
             <Image src="/startTimerButton.svg" width={24} height={24} alt="" quality={100}/>
-          </div>
+            ) : (
+              <Image src="/startTimerButtonDark.svg" width={24} height={24} alt="" quality={100}/>
+            )}
+            </div>
            ) : (
-            <div className="pauseTimerButton border border-primary rounded-full p-2 hover:bg-gray-100 cursor-pointer "
+            <div className="pauseTimerButton border border-primary dark:border-dark-primary rounded-full p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer "
             onClick={() => setIsActive(!isActive)}
             >
+              { currentTheme === "light" ? (
               <Image src="/pauseTimerButton.svg" width={24} height={24} alt="" quality={100}/>
+              ) : (
+                <Image src="/pauseTimerButtonDark.svg" width={24} height={24} alt="" quality={100}/>
+              )}
             </div>
             ) }
-          <div className="skipbutton border  border-border rounded-full p-1 hover:bg-gray-100 cursor-pointer "
+          <div className="skipbutton border  border-border rounded-full p-1 hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer "
           onClick={handelSkip}
           >
+            { currentTheme === "light" ? (
             <Image src="/skipTimerButton.svg" width={24} height={24} alt="" quality={100}/>
-          </div>
+            ) : (
+              <Image src="/skipTimerButtonDark.svg" width={24} height={24} alt="" quality={100}/>
+            )}
+            </div>
 
         </div>
         { DarkMode ? (
