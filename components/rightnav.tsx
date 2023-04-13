@@ -35,8 +35,8 @@ const RightNav = () => {
 
       
     <div className="div grid grid-cols-1  flex-1 items-center justify-center  gap-y-11 ">
-                <div  className=" w-full hover:bg-gray-100 py-3 pl-5" >
-                  <Link href="/" className={`time flex flex-row items-center  gap-x-2 cursor-pointer ml-4
+                <Link href="/" className=" w-full hover:bg-gray-100 dark:hover:bg-neutral-800 py-3 pl-5" >
+                  <div  className={`time flex flex-row items-center  gap-x-2 cursor-pointer ml-4
                   ${lastSelected === "timer" ? "opacity-100" : "opacity-60 hover:opacity-100  "}}  `
                 }
                   onClick={() => setLastSelected("timer")}
@@ -47,11 +47,11 @@ const RightNav = () => {
                     <Image src="/dark-timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
                     )}
                     <span  >Timer</span>
-                  </Link>
                   </div>
+                  </Link>
 
-                  <div  className=" w-full hover:bg-gray-100 py-3 pl-5" >
-                  <Link href={"/settings"} className={`settings flex flex-row gap-x-2 items-center ml-5 cursor-pointer
+                  <Link href={"/settings"} className=" w-full hover:bg-gray-100 dark:hover:bg-neutral-800 py-3 pl-5" >
+                  <div  className={`settings flex flex-row gap-x-2 items-center ml-5 cursor-pointer
                   ${lastSelected === "settings" ? "opacity-100" : "opacity-60 hover:opacity-100"}}  
                   `}
                   onClick={() => setLastSelected("settings")}
@@ -62,8 +62,8 @@ const RightNav = () => {
                       <Image src="/dark-settings.svg" width={35} height={30} alt="settings" quality={100}/>
                     )}
                       <span>Settings</span>
-                  </Link>
                   </div>
+                  </Link>
 
               
         
