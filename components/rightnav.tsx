@@ -25,8 +25,12 @@ const RightNav = () => {
          <div className="right hidden md:grid grid-cols-1 w-64 h-screen border-r  border-border items-center justify-center dark:bg-darkbg">
           <div className="self-start grid grid-cols-1 gap-y-16">
       <div className="logo flex flex-row items-center justify-center mr-6 mt-16 ">
+            { currentTheme === "light" ? (
             <Image src="/logo.svg" alt="logo"  width={58}  height={46}   quality={100}/>
-            <span className={` font-extrabold text-xl text-primary` }> Pomozone</span>
+            ) : (
+            <Image src="/dark-logo.svg" alt="logo"  width={58}  height={46}   quality={100}/>
+            )}
+            <span className={` font-extrabold text-xl text-primary dark:text-dark-primary` }> Pomozone</span>
           </div>
 
       
