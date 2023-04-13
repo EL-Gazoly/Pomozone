@@ -17,9 +17,7 @@ const Layout = ({ children }) => {
   const [show, setShow] = useState(false)
 
     return (
-        <div className={` 
-        ${DarkMode ? 'bg-black' : ''}
-        `}>
+        <div className=" dark:bg-darkbg">
           <div className="top md:hidden flex flex-row mt-7 mx-3 justify-between">
 
           <div className="sing-button border border-border flex flex-row cursor-pointer p-2 gap-x-2 hover:bg-gray-300 transition-all duration-500 items-center justify-center">

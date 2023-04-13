@@ -143,7 +143,7 @@ const Timer : FC<TimerProps> = () => {
        trailColor="#f06292"
        strokeLinecap="butt"
        
-       colors={['#7481FF', '#F7B801', '#A30000', '#A30000']}
+       colors={['#38BDF8', '#F7B801', '#A30000', '#A30000']}
        colorsTime={[7, 5, 2, 0]}
        onComplete={() => {
          handleDurationEnded()
