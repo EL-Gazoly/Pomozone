@@ -42,7 +42,7 @@ const RightNav = () => {
                   onClick={() => setLastSelected("timer")}
                   >
                     {currentTheme === "light" ? (
-                    <Image src="/timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
+                    <Image src="/timeIcon.svg" width={37} height={47} alt="time" quality={100}/>
                     ) : (
                     <Image src="/dark-timeIcon.svg" width={37} height={27} alt="time" quality={100}/>
                     )}

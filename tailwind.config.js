@@ -18,7 +18,7 @@ module.exports = {
         'primary' : '#03045E',
         'border' : '#9C9C9C',
         'darkbg' : '#0F172A',
-        'dark-primary': '#38BDF8'
+        'dark-primary': '#38bdf8'
       },
       borderWidth: {
         '6': '6px',
